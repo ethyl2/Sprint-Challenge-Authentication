@@ -65,6 +65,7 @@ function App() {
       </div>
 
       <footer>
+        <a href="https://www.stockio.com/free-icon/neck-tie-full-color">Tie icon from stockio.com</a>
         <p>Copyright 2020 Heather Nuffer</p>
       </footer>
 
