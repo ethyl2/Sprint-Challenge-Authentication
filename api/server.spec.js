@@ -42,3 +42,42 @@ describe('POST /api/auth/register', function() {
         });
     });      
 });
+
+describe('POST /api/auth/login', function() {
+    it ('should return status 200 after a successful registration', function() {
+        let randomNum = Math.random() * 8000;
+        return request(server)
+            .post('/api/auth/register')
+            .send({"username": `tom${randomNum}`,
+            "password": "toast",
+            })
+            .then(res => {
+                return request(server)
+                    .post('/api/auth/login')
+                    .send({"username": `tom${randomNum}`,
+                    "password": "toast",
+                    })
+                    .then(response => {
+                        expect(response.status).toBe(200);
+                    }); 
+            });
+    });
+    it ('should return a token after a successful registration', function() {
+        let randomNum = Math.random() * 8000;
+        return request(server)
+            .post('/api/auth/register')
+            .send({"username": `henrik${randomNum}`,
+            "password": "toast",
+            })
+            .then(res => {
+                return request(server)
+                    .post('/api/auth/login')
+                    .send({"username": `henrik${randomNum}`,
+                    "password": "toast",
+                    })
+                    .then(response => {
+                        expect(response.body.token).toBeDefined();
+                    }); 
+            });
+    });    
+});
