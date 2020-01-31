@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+import logo from './images/tie.svg';
 import './App.scss';
 import { NavLink, Route } from 'react-router-dom';
 import axios from 'axios';
@@ -44,18 +44,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          Dad Jokes
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      
+        <h1>Dad Jokes</h1>
+      
         <nav>
          <NavLink to='/home'>Home</NavLink>
          <NavLink to='/signup'>Sign Up</NavLink>
@@ -72,6 +63,10 @@ function App() {
         <Route path='/jokes' component={Jokes} /> 
         <Route path='/signout' component={SignOut} />
       </div>
+
+      <footer>
+        <p>Copyright 2020 Heather Nuffer</p>
+      </footer>
 
     </div>
   );
