@@ -81,3 +81,40 @@ describe('POST /api/auth/login', function() {
             });
     });    
 });
+
+describe('GET /api/jokes', function() {
+    it ('should return status 200 after a successful registration', function() {
+        let randomNum = Math.random() * 8000;
+        return request(server)
+            .post('/api/auth/register')
+            .send({"username": `declan${randomNum}`,
+            "password": "toast",
+            })
+            .then(res => {
+                let currentToken = res.body.token;
+                return request(server)
+                    .get('/api/jokes')
+                    .set('Authorization', currentToken)
+                    .then(response => {
+                        expect(response.status).toBe(200);
+                    });
+            });
+    });
+    it ('should return a body of length > 0 after a successful registration', function() {
+        let randomNum = Math.random() * 8000;
+        return request(server)
+            .post('/api/auth/register')
+            .send({"username": `abby${randomNum}`,
+            "password": "brasil",
+            })
+            .then(res => {
+                let currentToken = res.body.token;
+                return request(server)
+                    .get('/api/jokes')
+                    .set('Authorization', currentToken)
+                    .then(response => {
+                        expect(response.body.length).toBeGreaterThanOrEqual(1);
+                    });
+            });
+    });
+});
