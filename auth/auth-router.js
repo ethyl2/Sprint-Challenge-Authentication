@@ -21,6 +21,19 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
   // implement login
+  let { username, password } = req.body;
+  Users.findUserByUsername(username)
+      .then(user => {
+          if (user && bcrypt.compareSync(password, user.password)) {
+              const token = generateToken(user); 
+              res.status(200).json({message: 'Logged in successfully', token: token, user: user})
+          } else {
+              res.status(401).json({message: 'Invalid credentials. You shall not pass!'})
+          }
+      })
+      .catch(err => {
+          res.status(500).json({error: err, message: 'Failure to log in'})
+      });
 });
 
 function generateToken(user) {
